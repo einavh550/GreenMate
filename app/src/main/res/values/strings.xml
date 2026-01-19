@@ -1,3 +1,117 @@
 <resources>
-    <string name="app_name">GreenMate_Project</string>
+    <!-- App Identity -->
+    <string name="app_name">GreenMate</string>
+    <string name="app_tagline">Your smart gardening companion</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_plants">Plants</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Dashboard Screen -->
+    <string name="dashboard_greeting">Hello, Plant Parent!</string>
+    <string name="dashboard_today">Today\'s Care</string>
+    <string name="dashboard_overdue">Overdue</string>
+    <string name="dashboard_empty_today">No tasks for today</string>
+    <string name="dashboard_empty_overdue">No overdue tasks</string>
+    <string name="dashboard_all_done">All caught up! Your plants are happy.</string>
+
+    <!-- Plants Screen -->
+    <string name="plants_title">My Plants</string>
+    <string name="plants_empty_title">No Plants Yet</string>
+    <string name="plants_empty_message">Add your first plant to start tracking its care</string>
+    <string name="btn_add_plant">Add Plant</string>
+
+    <!-- Add/Edit Plant Screen -->
+    <string name="title_add_plant">Add Plant</string>
+    <string name="title_edit_plant">Edit Plant</string>
+    <string name="label_plant_name">Plant Name</string>
+    <string name="label_species">Species (optional)</string>
+    <string name="label_location">Location</string>
+    <string name="label_water_interval">Water every (days)</string>
+    <string name="label_fertilize_interval">Fertilize every (days)</string>
+    <string name="label_photo">Photo</string>
+    <string name="hint_plant_name">e.g., Monstera</string>
+    <string name="hint_species">e.g., Monstera deliciosa</string>
+    <string name="hint_location">e.g., Living room, Balcony</string>
+    <string name="btn_save_plant">Save Plant</string>
+    <string name="btn_add_photo">Add Photo</string>
+    <string name="btn_change_photo">Change Photo</string>
+
+    <!-- Plant Details Screen -->
+    <string name="title_plant_details">Plant Details</string>
+    <string name="label_next_water">Next Watering</string>
+    <string name="label_next_fertilize">Next Fertilizing</string>
+    <string name="label_care_history">Care History</string>
+    <string name="btn_water_now">Water Now</string>
+    <string name="btn_fertilize_now">Fertilize Now</string>
+    <string name="btn_edit_plant">Edit</string>
+    <string name="btn_delete_plant">Delete</string>
+    <string name="history_empty">No care history yet</string>
+
+    <!-- Care Actions -->
+    <string name="action_water">Water</string>
+    <string name="action_fertilize">Fertilize</string>
+    <string name="action_watered">Watered</string>
+    <string name="action_fertilized">Fertilized</string>
+    <string name="msg_plant_watered">Plant watered!</string>
+    <string name="msg_plant_fertilized">Plant fertilized!</string>
+
+    <!-- Task Status -->
+    <string name="status_due_today">Due today</string>
+    <string name="status_overdue">Overdue</string>
+    <string name="status_days_overdue">%d days overdue</string>
+    <string name="status_due_in_days">Due in %d days</string>
+
+    <!-- Plant Status -->
+    <string name="plant_status_ok">Healthy</string>
+    <string name="plant_status_needs_attention">Needs Attention</string>
+    <string name="plant_status_overdue">Overdue Care</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_system">System Default</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notifications_enabled">Enable Reminders</string>
+    <string name="settings_notification_time">Reminder Time</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_desc">GreenMate - Smart Gardening Companion\nAcademic Project</string>
+
+    <!-- Common Actions -->
+    <string name="action_back">Back</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_done">Done</string>
+    <string name="action_ok">OK</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_delete_plant_title">Delete Plant?</string>
+    <string name="dialog_delete_plant_message">This will permanently delete %s and all its care history.</string>
+
+    <!-- Common Messages -->
+    <string name="msg_loading">Loading…</string>
+    <string name="msg_error_generic">Something went wrong. Please try again.</string>
+    <string name="msg_plant_saved">Plant saved!</string>
+    <string name="msg_plant_deleted">Plant deleted</string>
+
+    <!-- Content Descriptions (Accessibility) -->
+    <string name="cd_app_logo">GreenMate logo</string>
+    <string name="cd_plant_photo">Plant photo</string>
+    <string name="cd_settings">Open settings</string>
+    <string name="cd_back">Go back</string>
+    <string name="cd_add_plant">Add a new plant</string>
+    <string name="cd_water_drop">Water drop icon</string>
+    <string name="cd_fertilizer">Fertilizer icon</string>
+
+    <!-- Notifications -->
+    <string name="notification_water_title">Time to Water!</string>
+    <string name="notification_water_body">%s needs watering today</string>
+    <string name="notification_fertilize_title">Fertilizing Time!</string>
+    <string name="notification_fertilize_body">%s needs fertilizing today</string>
+    <string name="notification_overdue_title">Care Overdue!</string>
+    <string name="notification_overdue_body">You have %d plants that need attention</string>
 </resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Common Plant Locations -->
+    <string-array name="plant_locations">
+        <item>Living Room</item>
+        <item>Bedroom</item>
+        <item>Kitchen</item>
+        <item>Bathroom</item>
+        <item>Balcony</item>
+        <item>Garden</item>
+        <item>Office</item>
+        <item>Patio</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Watering Interval Options (days) -->
+    <string-array name="water_intervals">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>7</item>
+        <item>10</item>
+        <item>14</item>
+    </string-array>
+
+    <!-- Fertilizing Interval Options (days) -->
+    <string-array name="fertilize_intervals">
+        <item>7</item>
+        <item>14</item>
+        <item>21</item>
+        <item>30</item>
+        <item>60</item>
+        <item>90</item>
+    </string-array>
+
+    <!-- Theme Options -->
+    <string-array name="theme_options">
+        <item>System Default</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+
+</resources>

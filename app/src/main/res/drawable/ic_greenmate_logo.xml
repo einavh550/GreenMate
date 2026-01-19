@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Outer circle background -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,10 C87.6,10 110,32.4 110,60 C110,87.6 87.6,110 60,110 C32.4,110 10,87.6 10,60 C10,32.4 32.4,10 60,10Z"/>
+
+    <!-- Main leaf shape -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M60,25 C75,35 85,50 85,70 C85,85 72,95 60,95 C48,95 35,85 35,70 C35,50 45,35 60,25Z"/>
+
+    <!-- Leaf vein - center -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M60,30 L60,88"
+        android:strokeWidth="3"
+        android:strokeColor="#1B5E20"/>
+
+    <!-- Leaf veins - left -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeWidth="2"
+        android:strokeColor="#1B5E20"
+        android:pathData="M60,45 L45,55"/>
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeWidth="2"
+        android:strokeColor="#1B5E20"
+        android:pathData="M60,58 L42,70"/>
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeWidth="2"
+        android:strokeColor="#1B5E20"
+        android:pathData="M60,71 L45,82"/>
+
+    <!-- Leaf veins - right -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeWidth="2"
+        android:strokeColor="#1B5E20"
+        android:pathData="M60,45 L75,55"/>
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeWidth="2"
+        android:strokeColor="#1B5E20"
+        android:pathData="M60,58 L78,70"/>
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeWidth="2"
+        android:strokeColor="#1B5E20"
+        android:pathData="M60,71 L75,82"/>
+
+    <!-- Small water drop accent -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M78,35 C82,40 84,45 82,48 C80,51 76,51 74,48 C72,45 74,40 78,35Z"/>
+
+</vector>

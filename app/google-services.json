@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "5582775869",
+    "project_id": "greenmate-6923d",
+    "storage_bucket": "greenmate-6923d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5582775869:android:bb0f35b865d4ce2641ec54",
+        "android_client_info": {
+          "package_name": "com.example.greenmate_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOvo6QAs2JQBKw_chn2v6apacAOOVlnOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

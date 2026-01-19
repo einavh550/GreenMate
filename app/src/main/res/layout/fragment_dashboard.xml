@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:padding="@dimen/spacing_lg"
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <!-- Greeting Header -->
+    <TextView
+        android:id="@+id/text_greeting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_greeting"
+        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Today's Tasks Section -->
+    <TextView
+        android:id="@+id/text_today_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:text="@string/dashboard_today"
+        android:textAppearance="@style/TextAppearance.GreenMate.Title"
+        app:layout_constraintTop_toBottomOf="@id/text_greeting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Today's Tasks RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_today_tasks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_sm"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/text_today_header"
+        app:layout_constraintBottom_toTopOf="@id/text_overdue_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
+        tools:listitem="@layout/item_care_task" />
+
+    <!-- Empty State for Today -->
+    <TextView
+        android:id="@+id/text_today_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_empty_today"
+        android:textAppearance="@style/TextAppearance.GreenMate.Body"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/recycler_today_tasks"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_today_tasks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
+
+    <!-- Overdue Section -->
+    <TextView
+        android:id="@+id/text_overdue_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:text="@string/dashboard_overdue"
+        android:textAppearance="@style/TextAppearance.GreenMate.Title"
+        android:textColor="@color/error"
+        app:layout_constraintTop_toBottomOf="@id/recycler_today_tasks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Overdue Tasks RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_overdue_tasks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_sm"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/text_overdue_header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_care_task" />
+
+    <!-- Empty State for Overdue -->
+    <TextView
+        android:id="@+id/text_overdue_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_empty_overdue"
+        android:textAppearance="@style/TextAppearance.GreenMate.Body"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/recycler_overdue_tasks"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_overdue_tasks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
+
+    <!-- All Done Message (shown when no tasks at all) -->
+    <TextView
+        android:id="@+id/text_all_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_all_done"
+        android:textAppearance="@style/TextAppearance.GreenMate.Title"
+        android:textColor="@color/primary"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/text_greeting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Loading Indicator -->
+    <ProgressBar
+        android:id="@+id/progress_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
