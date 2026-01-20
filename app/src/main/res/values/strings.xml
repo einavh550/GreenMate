@@ -40,6 +40,7 @@
 
     <!-- Plant Details Screen -->
     <string name="title_plant_details">Plant Details</string>
+    <string name="label_care_schedule">Care Schedule</string>
     <string name="label_next_water">Next Watering</string>
     <string name="label_next_fertilize">Next Fertilizing</string>
     <string name="label_care_history">Care History</string>
@@ -62,6 +63,12 @@
     <string name="status_overdue">Overdue</string>
     <string name="status_days_overdue">%d days overdue</string>
     <string name="status_due_in_days">Due in %d days</string>
+    <string name="status_due_tomorrow">Due tomorrow</string>
+    <string name="status_one_day_overdue">1 day overdue</string>
+
+    <!-- Interval Format -->
+    <string name="interval_every_day">Every day</string>
+    <string name="interval_every_n_days">Every %d days</string>
 
     <!-- Plant Status -->
     <string name="plant_status_ok">Healthy</string>
@@ -91,6 +98,9 @@
     <!-- Dialogs -->
     <string name="dialog_delete_plant_title">Delete Plant?</string>
     <string name="dialog_delete_plant_message">This will permanently delete %s and all its care history.</string>
+    <string name="dialog_select_image">Select Image</string>
+    <string name="option_take_photo">Take Photo</string>
+    <string name="option_choose_gallery">Choose from Gallery</string>
 
     <!-- Common Messages -->
     <string name="msg_loading">Loading…</string>
@@ -106,6 +116,16 @@
     <string name="cd_add_plant">Add a new plant</string>
     <string name="cd_water_drop">Water drop icon</string>
     <string name="cd_fertilizer">Fertilizer icon</string>
+    <string name="cd_search">Search plants</string>
+    <string name="cd_sort">Sort plants</string>
+    <string name="cd_edit">Edit plant</string>
+    <string name="cd_delete">Delete plant</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_stat_plants">Total plants statistic</string>
+    <string name="cd_stat_streak">Care streak statistic</string>
+    <string name="cd_stat_completed">Tasks completed this week</string>
+    <string name="cd_onboarding_image">Onboarding illustration</string>
+    <string name="cd_loading">Loading content</string>
 
     <!-- Notifications -->
     <string name="notification_water_title">Time to Water!</string>
@@ -114,4 +134,40 @@
     <string name="notification_fertilize_body">%s needs fertilizing today</string>
     <string name="notification_overdue_title">Care Overdue!</string>
     <string name="notification_overdue_body">You have %d plants that need attention</string>
+
+    <!-- Widget -->
+    <string name="widget_name">Care Tasks</string>
+    <string name="widget_description">Shows today\'s plant care tasks</string>
+    <string name="widget_no_tasks">No tasks</string>
+    <string name="widget_one_task">1 task</string>
+    <string name="widget_task_count">%d tasks</string>
+    <string name="widget_more_tasks">+%d more</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="onboarding_title_1">Welcome to GreenMate</string>
+    <string name="onboarding_desc_1">Your smart gardening companion that helps you take care of all your plants</string>
+    <string name="onboarding_title_2">Never Forget to Water</string>
+    <string name="onboarding_desc_2">Get timely reminders for watering and fertilizing your plants so they always stay healthy</string>
+    <string name="onboarding_title_3">Track Your Garden</string>
+    <string name="onboarding_desc_3">Keep all your plants organized, track their care history, and watch your garden thrive</string>
+
+    <!-- Statistics -->
+    <string name="stat_total_plants">Total Plants</string>
+    <string name="stat_care_streak">Day Streak</string>
+    <string name="stat_tasks_completed">This Week</string>
+
+    <!-- Search and Filter -->
+    <string name="hint_search_plants">Search plants…</string>
+    <string name="filter_all">All</string>
+    <string name="filter_needs_attention">Needs Care</string>
+    <string name="filter_healthy">Healthy</string>
+    <string name="filter_sort_name">A-Z</string>
+    <string name="filter_sort_date">Recent</string>
+    <string name="filter_sort_status">Status</string>
+    <string name="search_results_count">%d plants found</string>
+    <string name="search_no_results">No plants match your search</string>
+    <string name="search_no_results_filter">No plants match the selected filter</string>
 </resources>

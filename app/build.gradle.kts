@@ -51,6 +51,14 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
 
+    // Lifecycle (ViewModel, LiveData)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.fragment.ktx)
+
+    // WorkManager for background notifications
+    implementation(libs.workmanager)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

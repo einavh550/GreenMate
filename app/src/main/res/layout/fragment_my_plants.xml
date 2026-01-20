@@ -13,12 +13,117 @@
         android:id="@+id/text_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_lg"
+        android:paddingHorizontal="@dimen/spacing_lg"
+        android:paddingTop="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/spacing_sm"
         android:text="@string/plants_title"
         android:textAppearance="@style/TextAppearance.GreenMate.Headline"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Search Bar -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_search"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_lg"
+        android:hint="@string/hint_search_plants"
+        app:boxCornerRadiusBottomEnd="24dp"
+        app:boxCornerRadiusBottomStart="24dp"
+        app:boxCornerRadiusTopEnd="24dp"
+        app:boxCornerRadiusTopStart="24dp"
+        app:startIconDrawable="@drawable/ic_search"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@id/text_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeOptions="actionSearch" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Filter Chips -->
+    <HorizontalScrollView
+        android:id="@+id/scroll_filters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:scrollbars="none"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/spacing_md"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="false"
+            app:selectionRequired="false">
+
+            <!-- Sort Chip -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sort"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_sort_name"
+                app:chipIcon="@drawable/ic_sort"
+                app:checkedIconVisible="false" />
+
+            <!-- Filter: All -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_all"
+                android:checked="true" />
+
+            <!-- Filter: Needs Attention -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_needs_attention"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_needs_attention" />
+
+            <!-- Filter: Healthy -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_healthy"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_healthy" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <!-- Results count -->
+    <TextView
+        android:id="@+id/text_results_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_lg"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/scroll_filters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="3 plants found"
+        tools:visibility="visible" />
 
     <!-- Plants RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -28,7 +133,7 @@
         android:padding="@dimen/spacing_md"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/text_header"
+        app:layout_constraintTop_toBottomOf="@id/text_results_count"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,13 +147,14 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/text_header"
+        app:layout_constraintTop_toBottomOf="@id/scroll_filters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible">
 
         <ImageView
+            android:id="@+id/image_empty"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_leaf"
@@ -56,6 +162,7 @@
             android:importantForAccessibility="no" />
 
         <TextView
+            android:id="@+id/text_empty_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_md"
@@ -63,6 +170,7 @@
             android:textAppearance="@style/TextAppearance.GreenMate.Title" />
 
         <TextView
+            android:id="@+id/text_empty_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_sm"

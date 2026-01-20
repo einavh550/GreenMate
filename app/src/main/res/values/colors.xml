@@ -69,4 +69,6 @@
     <color name="primary_light">#4CAF50</color>
     <color name="secondary">#52634F</color>
     <color name="error">#BA1A1A</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="divider">#E0E0E0</color>
 </resources>

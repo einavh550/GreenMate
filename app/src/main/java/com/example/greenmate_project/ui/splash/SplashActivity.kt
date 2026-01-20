@@ -17,6 +17,8 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.example.greenmate_project.MainActivity
 import com.example.greenmate_project.R
 import com.example.greenmate_project.service.FirebaseAuthService
+import com.example.greenmate_project.ui.onboarding.OnboardingActivity
+import com.example.greenmate_project.util.PreferencesManager
 
 /**
  * Splash screen activity with animated logo and app branding.
@@ -120,7 +122,17 @@ class SplashActivity : AppCompatActivity() {
 
     private fun navigateToMainAfterDelay() {
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            val preferencesManager = PreferencesManager.getInstance(this)
+
+            val destination = if (preferencesManager.isOnboardingCompleted()) {
+                // User has completed onboarding, go to main
+                Intent(this, MainActivity::class.java)
+            } else {
+                // First time user, show onboarding
+                Intent(this, OnboardingActivity::class.java)
+            }
+
+            startActivity(destination)
             finish()
             // Smooth transition
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationContentDescription="@string/action_back"
+            app:menu="@menu/menu_plant_detail"
+            tools:title="@string/title_plant_details" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_lg">
+
+            <!-- Plant Info Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Plant Icon -->
+                <ImageView
+                    android:id="@+id/image_plant"
+                    android:layout_width="@dimen/icon_size_hero"
+                    android:layout_height="@dimen/icon_size_hero"
+                    android:background="@drawable/bg_icon_circle"
+                    android:padding="@dimen/spacing_lg"
+                    android:src="@drawable/ic_leaf"
+                    android:importantForAccessibility="no"
+                    app:tint="@color/primary" />
+
+                <!-- Plant Name and Location -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_plant_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
+                        tools:text="My Monstera" />
+
+                    <TextView
+                        android:id="@+id/text_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Body"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        tools:text="Living Room" />
+
+                    <!-- Status Badge -->
+                    <TextView
+                        android:id="@+id/badge_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:background="@drawable/bg_status_badge"
+                        android:paddingHorizontal="@dimen/spacing_sm"
+                        android:paddingVertical="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                        android:textColor="@color/white"
+                        tools:text="Healthy"
+                        tools:backgroundTint="@color/score_green" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Care Schedule Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:text="@string/label_care_schedule"
+                android:textAppearance="@style/TextAppearance.GreenMate.Title" />
+
+            <!-- Next Watering Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_md"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_xl"
+                        android:layout_height="@dimen/icon_size_xl"
+                        android:background="@drawable/bg_icon_circle"
+                        android:padding="@dimen/spacing_sm"
+                        android:src="@drawable/ic_water"
+                        android:importantForAccessibility="no"
+                        app:tint="@color/primary_light" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_next_water"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Body" />
+
+                        <TextView
+                            android:id="@+id/text_next_water"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                            tools:text="Due today" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_water"
+                        style="@style/Widget.GreenMate.Button.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_water_now" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Next Fertilizing Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_md"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_xl"
+                        android:layout_height="@dimen/icon_size_xl"
+                        android:background="@drawable/bg_icon_circle"
+                        android:padding="@dimen/spacing_sm"
+                        android:src="@drawable/ic_fertilizer"
+                        android:importantForAccessibility="no"
+                        app:tint="@color/earth_light" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_next_fertilize"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Body" />
+
+                        <TextView
+                            android:id="@+id/text_next_fertilize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                            tools:text="Due in 7 days" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_fertilize"
+                        style="@style/Widget.GreenMate.Button.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_fertilize_now" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Care History Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:text="@string/label_care_history"
+                android:textAppearance="@style/TextAppearance.GreenMate.Title" />
+
+            <!-- Care History RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_care_history" />
+
+            <!-- Empty History State -->
+            <TextView
+                android:id="@+id/text_history_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:gravity="center"
+                android:padding="@dimen/spacing_xl"
+                android:text="@string/history_empty"
+                android:textAppearance="@style/TextAppearance.GreenMate.Body"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Loading Overlay -->
+    <FrameLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80FFFFFF"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

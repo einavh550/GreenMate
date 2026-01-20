@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Plant pot -->
+    <path
+        android:fillColor="@color/earth_light"
+        android:pathData="M7,20h10l1,-6H6l1,6z" />
+
+    <!-- Pot rim -->
+    <path
+        android:fillColor="@color/earth_primary"
+        android:pathData="M5,14h14v2H5z" />
+
+    <!-- Leaf 1 -->
+    <path
+        android:fillColor="@color/primary"
+        android:pathData="M12,14c0,0 -4,-4 -4,-7c0,-2 2,-4 4,-4c2,0 4,2 4,4C16,10 12,14 12,14z" />
+
+    <!-- Leaf 2 -->
+    <path
+        android:fillColor="@color/primary_light"
+        android:pathData="M12,12c0,0 3,-3 5,-3c1.5,0 2,1 2,2C19,12.5 12,12 12,12z" />
+
+    <!-- Leaf 3 -->
+    <path
+        android:fillColor="@color/primary_light"
+        android:pathData="M12,12c0,0 -3,-3 -5,-3c-1.5,0 -2,1 -2,2C5,12.5 12,12 12,12z" />
+
+</vector>

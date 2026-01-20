@@ -1,131 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
-    android:padding="@dimen/spacing_lg"
+    android:fillViewport="true"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <!-- Greeting Header -->
-    <TextView
-        android:id="@+id/text_greeting"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dashboard_greeting"
-        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:padding="@dimen/spacing_lg">
 
-    <!-- Today's Tasks Section -->
-    <TextView
-        android:id="@+id/text_today_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_lg"
-        android:text="@string/dashboard_today"
-        android:textAppearance="@style/TextAppearance.GreenMate.Title"
-        app:layout_constraintTop_toBottomOf="@id/text_greeting"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Greeting Header -->
+        <TextView
+            android:id="@+id/text_greeting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/dashboard_greeting"
+            android:textAppearance="@style/TextAppearance.GreenMate.Headline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Today's Tasks RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_today_tasks"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/spacing_sm"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/text_today_header"
-        app:layout_constraintBottom_toTopOf="@id/text_overdue_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.35"
-        tools:listitem="@layout/item_care_task" />
+        <!-- Statistics Section -->
+        <LinearLayout
+            android:id="@+id/layout_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintTop_toBottomOf="@id/text_greeting"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Empty State for Today -->
-    <TextView
-        android:id="@+id/text_today_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dashboard_empty_today"
-        android:textAppearance="@style/TextAppearance.GreenMate.Body"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/recycler_today_tasks"
-        app:layout_constraintBottom_toBottomOf="@id/recycler_today_tasks"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible" />
+            <!-- Total Plants Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/spacing_xs"
+                app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp">
 
-    <!-- Overdue Section -->
-    <TextView
-        android:id="@+id/text_overdue_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_lg"
-        android:text="@string/dashboard_overdue"
-        android:textAppearance="@style/TextAppearance.GreenMate.Title"
-        android:textColor="@color/error"
-        app:layout_constraintTop_toBottomOf="@id/recycler_today_tasks"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_md">
 
-    <!-- Overdue Tasks RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_overdue_tasks"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/spacing_sm"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/text_overdue_header"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_care_task" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_plant"
+                        android:contentDescription="@null"
+                        app:tint="@color/primary" />
 
-    <!-- Empty State for Overdue -->
-    <TextView
-        android:id="@+id/text_overdue_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dashboard_empty_overdue"
-        android:textAppearance="@style/TextAppearance.GreenMate.Body"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/recycler_overdue_tasks"
-        app:layout_constraintBottom_toBottomOf="@id/recycler_overdue_tasks"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible" />
+                    <TextView
+                        android:id="@+id/text_stat_plants"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
+                        android:textColor="@color/primary"
+                        tools:text="12" />
 
-    <!-- All Done Message (shown when no tasks at all) -->
-    <TextView
-        android:id="@+id/text_all_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dashboard_all_done"
-        android:textAppearance="@style/TextAppearance.GreenMate.Title"
-        android:textColor="@color/primary"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/text_greeting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stat_total_plants"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:gravity="center" />
 
-    <!-- Loading Indicator -->
-    <ProgressBar
-        android:id="@+id/progress_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Care Streak Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:layout_marginEnd="@dimen/spacing_xs"
+                app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_md">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_streak"
+                        android:contentDescription="@null"
+                        app:tint="@color/secondary" />
+
+                    <TextView
+                        android:id="@+id/text_stat_streak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
+                        android:textColor="@color/secondary"
+                        tools:text="7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stat_care_streak"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:gravity="center" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Tasks Completed Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_xs"
+                app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_md">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_check_circle"
+                        android:contentDescription="@null"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/text_stat_completed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
+                        android:textColor="@color/primary"
+                        tools:text="24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stat_tasks_completed"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:gravity="center" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Today's Tasks Section -->
+        <TextView
+            android:id="@+id/text_today_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="@string/dashboard_today"
+            android:textAppearance="@style/TextAppearance.GreenMate.Title"
+            app:layout_constraintTop_toBottomOf="@id/layout_stats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Today's Tasks RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_today_tasks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/text_today_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_care_task"
+            tools:itemCount="3" />
+
+        <!-- Empty State for Today -->
+        <TextView
+            android:id="@+id/text_today_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="@string/dashboard_empty_today"
+            android:textAppearance="@style/TextAppearance.GreenMate.Body"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/text_today_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+
+        <!-- Overdue Section -->
+        <TextView
+            android:id="@+id/text_overdue_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="@string/dashboard_overdue"
+            android:textAppearance="@style/TextAppearance.GreenMate.Title"
+            android:textColor="@color/error"
+            app:layout_constraintTop_toBottomOf="@id/recycler_today_tasks"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Overdue Tasks RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_overdue_tasks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/text_overdue_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_care_task"
+            tools:itemCount="2" />
+
+        <!-- Empty State for Overdue -->
+        <TextView
+            android:id="@+id/text_overdue_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="@string/dashboard_empty_overdue"
+            android:textAppearance="@style/TextAppearance.GreenMate.Body"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/text_overdue_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+
+        <!-- All Done Message (shown when no tasks at all) -->
+        <TextView
+            android:id="@+id/text_all_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:text="@string/dashboard_all_done"
+            android:textAppearance="@style/TextAppearance.GreenMate.Title"
+            android:textColor="@color/primary"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/layout_stats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Loading Indicator -->
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

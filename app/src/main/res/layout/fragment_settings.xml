@@ -100,6 +100,33 @@
                     android:layout_marginTop="@dimen/spacing_sm"
                     android:text="@string/settings_notifications_enabled" />
 
+                <LinearLayout
+                    android:id="@+id/layout_notification_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/spacing_sm"
+                    android:background="?attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_notification_time"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Body" />
+
+                    <TextView
+                        android:id="@+id/text_notification_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.GreenMate.Body"
+                        android:textColor="?attr/colorPrimary"
+                        tools:text="9:00 AM" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>

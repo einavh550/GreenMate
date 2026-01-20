@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Cache directory for temporary camera captures -->
+    <cache-path
+        name="cache"
+        path="." />
+
+    <!-- Internal files directory for saved plant images -->
+    <files-path
+        name="plant_images"
+        path="plant_images/" />
+</paths>

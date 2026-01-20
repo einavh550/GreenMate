@@ -8,6 +8,10 @@
     <!-- Notification permission (Android 13+) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Camera permission for taking plant photos -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <application
         android:name=".GreenMateApp"
         android:allowBackup="true"
@@ -30,10 +34,52 @@
             </intent-filter>
         </activity>
 
+        <!-- Onboarding Activity -->
+        <activity
+            android:name=".ui.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GreenMate_Project" />
+
         <!-- Main Activity (hosts bottom navigation) -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <!-- Add/Edit Plant Activity -->
+        <activity
+            android:name=".ui.plants.AddEditPlantActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <!-- Plant Detail Activity -->
+        <activity
+            android:name=".ui.plants.PlantDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <!-- FileProvider for camera captures -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Care Tasks Home Screen Widget -->
+        <receiver
+            android:name=".widget.CareTasksWidget"
+            android:exported="true"
+            android:label="@string/widget_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_care_tasks_info" />
+        </receiver>
 
     </application>
 
