@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@drawable/bg_app_light">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -112,20 +113,21 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Location -->
+            <!-- Location Dropdown -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_location"
-                style="@style/Widget.GreenMate.TextInputLayout"
+                style="@style/Widget.GreenMate.TextInputLayout.Dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_md"
-                android:hint="@string/label_location">
+                android:hint="@string/label_location"
+                app:endIconMode="dropdown_menu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/input_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapWords"
+                    android:inputType="none"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>

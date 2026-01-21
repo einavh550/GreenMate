@@ -71,4 +71,26 @@
     <color name="error">#BA1A1A</color>
     <color name="surface">#FFFFFF</color>
     <color name="divider">#E0E0E0</color>
+
+    <!-- ==================== PREMIUM CARD SURFACES ==================== -->
+    <!-- Subtle sage/green tinted card surface (NOT plain white) -->
+    <color name="card_premium_surface">#F5F9F5</color>
+    <color name="card_premium_stroke">#E0E8E0</color>
+
+    <!-- ==================== STATUS BADGE COLORS ==================== -->
+    <color name="badge_healthy">#43A047</color>
+    <color name="badge_healthy_surface">#E8F5E9</color>
+    <color name="badge_attention">#F57C00</color>
+    <color name="badge_attention_surface">#FFF3E0</color>
+
+    <!-- ==================== CTA BUTTON COLORS ==================== -->
+    <!-- Water button: Premium green -->
+    <color name="button_water_background">#2E7D32</color>
+    <color name="button_water_text">#FFFFFF</color>
+    <!-- Fertilize button: Premium soil/brown -->
+    <color name="button_fertilize_background">#5D4037</color>
+    <color name="button_fertilize_text">#FFFFFF</color>
+
+    <!-- ==================== THUMBNAIL PLACEHOLDER ==================== -->
+    <color name="thumbnail_placeholder">#E8F5E9</color>
 </resources>

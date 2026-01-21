@@ -50,7 +50,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Filter Chips -->
+    <!-- Status Filter Chips -->
     <HorizontalScrollView
         android:id="@+id/scroll_filters"
         android:layout_width="0dp"
@@ -109,6 +109,84 @@
 
     </HorizontalScrollView>
 
+    <!-- Location Filter Label -->
+    <TextView
+        android:id="@+id/text_location_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_lg"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:text="@string/filter_location"
+        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        app:layout_constraintTop_toBottomOf="@id/scroll_filters"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Location Filter Chips -->
+    <HorizontalScrollView
+        android:id="@+id/scroll_location_filters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:scrollbars="none"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/spacing_md"
+        app:layout_constraintTop_toBottomOf="@id/text_location_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_locations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <!-- Location: All -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_location_all"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_all"
+                android:checked="true" />
+
+            <!-- Location: Living Room -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_location_living_room"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location_living_room" />
+
+            <!-- Location: Balcony -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_location_balcony"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location_balcony" />
+
+            <!-- Location: Room -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_location_room"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location_room" />
+
+            <!-- Location: Garden -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_location_garden"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location_garden" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
     <!-- Results count -->
     <TextView
         android:id="@+id/text_results_count"
@@ -119,25 +197,26 @@
         android:textAppearance="@style/TextAppearance.GreenMate.Caption"
         android:textColor="?attr/colorOnSurfaceVariant"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/scroll_filters"
+        app:layout_constraintTop_toBottomOf="@id/scroll_location_filters"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="3 plants found"
         tools:visibility="visible" />
 
-    <!-- Plants RecyclerView -->
+    <!-- Plants RecyclerView with 3-Column Grid Layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_plants"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="@dimen/spacing_md"
+        android:padding="@dimen/spacing_xs"
         android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
         app:layout_constraintTop_toBottomOf="@id/text_results_count"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_plant" />
+        tools:listitem="@layout/item_plant_grid" />
 
     <!-- Empty State -->
     <LinearLayout
@@ -147,7 +226,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/scroll_filters"
+        app:layout_constraintTop_toBottomOf="@id/scroll_location_filters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,6 +256,17 @@
             android:text="@string/plants_empty_message"
             android:textAppearance="@style/TextAppearance.GreenMate.Body"
             android:textColor="?attr/colorOnSurfaceVariant" />
+
+        <!-- Add Plant CTA Button (shown when no plants) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_first_plant"
+            style="@style/Widget.GreenMate.Button.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="@string/btn_add_plant"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </LinearLayout>
 

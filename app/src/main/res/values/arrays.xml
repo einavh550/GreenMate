@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Common Plant Locations -->
+    <!-- Fixed Plant Locations (used in Add/Edit and filter) -->
     <string-array name="plant_locations">
         <item>Living Room</item>
-        <item>Bedroom</item>
-        <item>Kitchen</item>
-        <item>Bathroom</item>
         <item>Balcony</item>
+        <item>Room</item>
         <item>Garden</item>
-        <item>Office</item>
-        <item>Patio</item>
-        <item>Other</item>
     </string-array>
 
     <!-- Watering Interval Options (days) -->

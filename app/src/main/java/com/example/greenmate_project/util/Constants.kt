@@ -39,6 +39,8 @@ object Constants {
     object Defaults {
         const val WATER_INTERVAL_DAYS = 3
         const val FERTILIZE_INTERVAL_DAYS = 14
+        const val DEFAULT_WATER_INTERVAL = 3
+        const val DEFAULT_FERTILIZE_INTERVAL = 14
         const val NOTIFICATION_HOUR = 9
         const val NOTIFICATION_MINUTE = 0
     }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Decorative leaf for corner backgrounds.
+    Use with low alpha (0.08-0.12) in layouts.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Main leaf shape -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M10,190
+                         Q5,140 20,90
+                         Q40,40 90,20
+                         Q130,5 160,15
+                         Q185,25 190,55
+                         Q195,85 175,115
+                         Q150,150 110,170
+                         Q70,190 30,190
+                         Q15,190 10,190 Z" />
+
+    <!-- Center vein -->
+    <path
+        android:strokeColor="#388E3C"
+        android:strokeWidth="3"
+        android:pathData="M20,180 Q70,130 110,80 Q140,45 175,25"
+        android:fillColor="@android:color/transparent" />
+
+    <!-- Side veins -->
+    <path
+        android:strokeColor="#43A047"
+        android:strokeWidth="1.5"
+        android:pathData="M40,165 Q70,130 100,105"
+        android:fillColor="@android:color/transparent" />
+
+    <path
+        android:strokeColor="#43A047"
+        android:strokeWidth="1.5"
+        android:pathData="M60,175 Q95,140 125,110"
+        android:fillColor="@android:color/transparent" />
+
+    <path
+        android:strokeColor="#43A047"
+        android:strokeWidth="1.5"
+        android:pathData="M85,105 Q105,85 130,65"
+        android:fillColor="@android:color/transparent" />
+
+</vector>

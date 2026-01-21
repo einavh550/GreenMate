@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * ViewModel for the My Plants screen.
- * Manages plant list data, search, filtering, and sorting.
+ * Manages plant list data, search, filtering (status + location), and sorting.
  */
 class MyPlantsViewModel : ViewModel() {
 
@@ -24,8 +24,11 @@ class MyPlantsViewModel : ViewModel() {
     // Current search query
     private var currentSearchQuery: String = ""
 
-    // Current filter
+    // Current status filter
     private var currentFilter: PlantFilter = PlantFilter.ALL
+
+    // Current location filter
+    private var currentLocationFilter: LocationFilter = LocationFilter.ALL
 
     // Current sort order
     private var currentSortOrder: SortOrder = SortOrder.NAME_ASC
@@ -64,6 +67,10 @@ class MyPlantsViewModel : ViewModel() {
     private val _sortOrder = MutableLiveData<SortOrder>(SortOrder.NAME_ASC)
     val sortOrder: LiveData<SortOrder> = _sortOrder
 
+    // Current location filter for UI
+    private val _locationFilter = MutableLiveData<LocationFilter>(LocationFilter.ALL)
+    val locationFilter: LiveData<LocationFilter> = _locationFilter
+
     /**
      * Loads all plants for the current user.
      */
@@ -95,10 +102,19 @@ class MyPlantsViewModel : ViewModel() {
     }
 
     /**
-     * Sets the filter type.
+     * Sets the status filter type.
      */
     fun setFilter(filter: PlantFilter) {
         currentFilter = filter
+        applyFiltersAndSort()
+    }
+
+    /**
+     * Sets the location filter.
+     */
+    fun setLocationFilter(filter: LocationFilter) {
+        currentLocationFilter = filter
+        _locationFilter.value = filter
         applyFiltersAndSort()
     }
 
@@ -117,12 +133,17 @@ class MyPlantsViewModel : ViewModel() {
     }
 
     /**
-     * Gets the current filter.
+     * Gets the current status filter.
      */
     fun getCurrentFilter(): PlantFilter = currentFilter
 
     /**
-     * Applies current search, filter, and sort settings.
+     * Gets the current location filter.
+     */
+    fun getCurrentLocationFilter(): LocationFilter = currentLocationFilter
+
+    /**
+     * Applies current search, filter (status + location), and sort settings.
      */
     private fun applyFiltersAndSort() {
         var result = allPlants
@@ -147,6 +168,15 @@ class MyPlantsViewModel : ViewModel() {
             }
         }
 
+        // Apply location filter
+        result = when (currentLocationFilter) {
+            LocationFilter.ALL -> result
+            LocationFilter.LIVING_ROOM -> result.filter { it.location.equals("Living Room", ignoreCase = true) }
+            LocationFilter.BALCONY -> result.filter { it.location.equals("Balcony", ignoreCase = true) }
+            LocationFilter.ROOM -> result.filter { it.location.equals("Room", ignoreCase = true) }
+            LocationFilter.GARDEN -> result.filter { it.location.equals("Garden", ignoreCase = true) }
+        }
+
         // Apply sorting
         result = when (currentSortOrder) {
             SortOrder.NAME_ASC -> result.sortedBy { it.name.lowercase() }
@@ -162,7 +192,9 @@ class MyPlantsViewModel : ViewModel() {
 
         _filteredPlants.value = result
         _resultsCount.value = result.size
-        _hasActiveFilters.value = currentSearchQuery.isNotEmpty() || currentFilter != PlantFilter.ALL
+        _hasActiveFilters.value = currentSearchQuery.isNotEmpty() ||
+                currentFilter != PlantFilter.ALL ||
+                currentLocationFilter != LocationFilter.ALL
     }
 
     /**
@@ -252,12 +284,23 @@ class MyPlantsViewModel : ViewModel() {
     }
 
     /**
-     * Filter options for plants.
+     * Status filter options for plants.
      */
     enum class PlantFilter {
         ALL,
         NEEDS_ATTENTION,
         HEALTHY
+    }
+
+    /**
+     * Location filter options.
+     */
+    enum class LocationFilter {
+        ALL,
+        LIVING_ROOM,
+        BALCONY,
+        ROOM,
+        GARDEN
     }
 
     /**

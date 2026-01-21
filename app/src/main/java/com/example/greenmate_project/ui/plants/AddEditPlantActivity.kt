@@ -2,11 +2,11 @@ package com.example.greenmate_project.ui.plants
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -19,6 +19,7 @@ import com.example.greenmate_project.R
 import com.example.greenmate_project.util.AnimationUtils
 import com.example.greenmate_project.util.Constants
 import com.example.greenmate_project.util.ImageUtils
+import com.example.greenmate_project.util.PreferencesManager
 import com.example.greenmate_project.widget.CareTasksWidget
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
@@ -40,8 +41,9 @@ class AddEditPlantActivity : AppCompatActivity() {
     private lateinit var cardPhoto: MaterialCardView
     private lateinit var imagePlant: ImageView
     private lateinit var inputLayoutName: TextInputLayout
+    private lateinit var inputLayoutLocation: TextInputLayout
     private lateinit var inputName: TextInputEditText
-    private lateinit var inputLocation: TextInputEditText
+    private lateinit var inputLocation: AutoCompleteTextView
     private lateinit var sliderWaterInterval: Slider
     private lateinit var sliderFertilizeInterval: Slider
     private lateinit var textWaterIntervalValue: TextView
@@ -83,9 +85,14 @@ class AddEditPlantActivity : AppCompatActivity() {
         setupListeners()
         observeViewModel()
 
-        // Load plant data if editing
+        // Load plant data if editing, otherwise set defaults from preferences
         if (isEditMode && plantId != null) {
             viewModel.loadPlant(plantId!!)
+        } else {
+            // Set default intervals from user preferences
+            val preferencesManager = PreferencesManager.getInstance(this)
+            viewModel.setWaterInterval(preferencesManager.getDefaultWaterInterval())
+            viewModel.setFertilizeInterval(preferencesManager.getDefaultFertilizeInterval())
         }
     }
 
@@ -94,6 +101,7 @@ class AddEditPlantActivity : AppCompatActivity() {
         cardPhoto = findViewById(R.id.card_photo)
         imagePlant = findViewById(R.id.image_plant)
         inputLayoutName = findViewById(R.id.input_layout_name)
+        inputLayoutLocation = findViewById(R.id.input_layout_location)
         inputName = findViewById(R.id.input_name)
         inputLocation = findViewById(R.id.input_location)
         sliderWaterInterval = findViewById(R.id.slider_water_interval)
@@ -101,6 +109,15 @@ class AddEditPlantActivity : AppCompatActivity() {
         textWaterIntervalValue = findViewById(R.id.text_water_interval_value)
         textFertilizeIntervalValue = findViewById(R.id.text_fertilize_interval_value)
         layoutLoading = findViewById(R.id.layout_loading)
+
+        // Setup location dropdown with fixed values from arrays.xml
+        setupLocationDropdown()
+    }
+
+    private fun setupLocationDropdown() {
+        val locations = resources.getStringArray(R.array.plant_locations)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, locations)
+        inputLocation.setAdapter(adapter)
     }
 
     private fun setupToolbar() {
@@ -137,9 +154,12 @@ class AddEditPlantActivity : AppCompatActivity() {
             viewModel.setPlantName(text?.toString() ?: "")
         }
 
-        // Location input
-        inputLocation.doAfterTextChanged { text ->
-            viewModel.setLocation(text?.toString() ?: "")
+        // Location dropdown selection
+        inputLocation.setOnItemClickListener { _, _, position, _ ->
+            val locations = resources.getStringArray(R.array.plant_locations)
+            if (position < locations.size) {
+                viewModel.setLocation(locations[position])
+            }
         }
 
         // Water interval slider
@@ -207,7 +227,7 @@ class AddEditPlantActivity : AppCompatActivity() {
 
         viewModel.location.observe(this) { location ->
             if (inputLocation.text?.toString() != location) {
-                inputLocation.setText(location)
+                inputLocation.setText(location, false)
             }
         }
 

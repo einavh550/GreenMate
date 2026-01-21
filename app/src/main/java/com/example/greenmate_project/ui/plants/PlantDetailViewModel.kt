@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
  * ViewModel for the Plant Detail screen.
  * Manages plant data, care actions, and history.
  */
-class PlantDetailViewModel : ViewModel() {
+class  PlantDetailViewModel : ViewModel() {
 
     private val plantRepository: PlantRepository = PlantRepositoryImpl()
     private val actionRepository: ActionRepository = ActionRepositoryImpl()

@@ -6,8 +6,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="@drawable/bg_app_light"
     tools:context=".MainActivity">
+
+    <!-- Decorative leaf: Top-Left Corner -->
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/ic_leaf_decor"
+        android:alpha="0.08"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="-40dp"
+        android:layout_marginStart="-40dp" />
+
+    <!-- Decorative leaf: Bottom-Right Corner (rotated) -->
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/ic_leaf_decor"
+        android:alpha="0.08"
+        android:rotation="180"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="-40dp"
+        android:layout_marginEnd="-40dp" />
 
     <!-- Fragment container for tab content -->
     <androidx.fragment.app.FragmentContainerView
@@ -24,7 +51,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
+        android:background="@color/card_premium_surface"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

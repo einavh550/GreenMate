@@ -105,6 +105,58 @@ class PreferencesManager(context: Context) {
         prefs.edit().putBoolean(KEY_ONBOARDING_COMPLETED, completed).apply()
     }
 
+    // ========== Default Plant Intervals ==========
+
+    /**
+     * Gets the default water interval in days for new plants.
+     * @return Default water interval in days.
+     */
+    fun getDefaultWaterInterval(): Int {
+        return prefs.getInt(KEY_DEFAULT_WATER_INTERVAL, Constants.Defaults.DEFAULT_WATER_INTERVAL)
+    }
+
+    /**
+     * Sets the default water interval for new plants.
+     * @param days Water interval in days.
+     */
+    fun setDefaultWaterInterval(days: Int) {
+        prefs.edit().putInt(KEY_DEFAULT_WATER_INTERVAL, days).apply()
+    }
+
+    /**
+     * Gets the default fertilize interval in days for new plants.
+     * @return Default fertilize interval in days.
+     */
+    fun getDefaultFertilizeInterval(): Int {
+        return prefs.getInt(KEY_DEFAULT_FERTILIZE_INTERVAL, Constants.Defaults.DEFAULT_FERTILIZE_INTERVAL)
+    }
+
+    /**
+     * Sets the default fertilize interval for new plants.
+     * @param days Fertilize interval in days.
+     */
+    fun setDefaultFertilizeInterval(days: Int) {
+        prefs.edit().putInt(KEY_DEFAULT_FERTILIZE_INTERVAL, days).apply()
+    }
+
+    // ========== Reset Functions ==========
+
+    /**
+     * Resets all local preferences to default values.
+     * Does not affect Firestore data.
+     */
+    fun resetLocalPreferences() {
+        prefs.edit()
+            .putInt(KEY_THEME_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            .putBoolean(KEY_NOTIFICATIONS_ENABLED, true)
+            .putInt(KEY_NOTIFICATION_TIME, DEFAULT_NOTIFICATION_TIME)
+            .putInt(KEY_DEFAULT_WATER_INTERVAL, Constants.Defaults.DEFAULT_WATER_INTERVAL)
+            .putInt(KEY_DEFAULT_FERTILIZE_INTERVAL, Constants.Defaults.DEFAULT_FERTILIZE_INTERVAL)
+            .putInt(KEY_CARE_STREAK, 0)
+            .putInt(KEY_TASKS_COMPLETED_WEEK, 0)
+            .apply()
+    }
+
     // ========== Statistics ==========
 
     /**
@@ -192,6 +244,10 @@ class PreferencesManager(context: Context) {
         private const val KEY_LAST_STREAK_UPDATE = "last_streak_update"
         private const val KEY_TASKS_COMPLETED_WEEK = "tasks_completed_week"
         private const val KEY_LAST_TASK_COUNT_WEEK = "last_task_count_week"
+
+        // Default plant interval keys
+        private const val KEY_DEFAULT_WATER_INTERVAL = "default_water_interval"
+        private const val KEY_DEFAULT_FERTILIZE_INTERVAL = "default_fertilize_interval"
 
         @Volatile
         private var instance: PreferencesManager? = null

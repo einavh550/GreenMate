@@ -84,8 +84,24 @@
     <string name="settings_notifications">Notifications</string>
     <string name="settings_notifications_enabled">Enable Reminders</string>
     <string name="settings_notification_time">Reminder Time</string>
+    <string name="settings_defaults">Default Plant Settings</string>
+    <string name="settings_defaults_desc">Prefilled values when adding new plants</string>
+    <string name="settings_default_water">Water Interval</string>
+    <string name="settings_default_fertilize">Fertilize Interval</string>
+    <string name="settings_maintenance">Maintenance</string>
+    <string name="settings_reset_preferences">Reset Preferences</string>
+    <string name="settings_reset_preferences_desc">Restore theme, notifications, and defaults to original values</string>
+    <string name="settings_reset_confirm_title">Reset Preferences?</string>
+    <string name="settings_reset_confirm_message">This will restore all settings to their default values. Your plants and care history will not be affected.</string>
+    <string name="settings_reset_success">Preferences reset successfully</string>
     <string name="settings_about">About</string>
-    <string name="settings_about_desc">GreenMate - Smart Gardening Companion\nAcademic Project</string>
+
+    <!-- About Content -->
+    <string name="about_app_name">GreenMate — Smart Gardening Companion</string>
+    <string name="about_subtitle">Academic Course Project</string>
+    <string name="about_description">GreenMate helps you track watering and fertilizing schedules for all your plants, log care actions, and receive timely reminders so your garden always thrives.</string>
+    <string name="about_features_title">Key Features:</string>
+    <string name="about_features_list">• Track multiple plants with custom care schedules\n• Get daily reminders for watering and fertilizing\n• View care history and statistics\n• Organize plants by location\n• Home screen widget for quick access</string>
 
     <!-- Common Actions -->
     <string name="action_back">Back</string>
@@ -167,7 +183,14 @@
     <string name="filter_sort_name">A-Z</string>
     <string name="filter_sort_date">Recent</string>
     <string name="filter_sort_status">Status</string>
+    <string name="filter_location">Location</string>
     <string name="search_results_count">%d plants found</string>
     <string name="search_no_results">No plants match your search</string>
     <string name="search_no_results_filter">No plants match the selected filter</string>
+
+    <!-- Location Names -->
+    <string name="location_living_room">Living Room</string>
+    <string name="location_balcony">Balcony</string>
+    <string name="location_room">Room</string>
+    <string name="location_garden">Garden</string>
 </resources>

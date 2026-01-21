@@ -65,4 +65,41 @@
     <!-- Empty State -->
     <dimen name="empty_state_icon_size">96dp</dimen>
     <dimen name="empty_state_max_width">280dp</dimen>
+
+    <!-- Plant Grid -->
+    <dimen name="plant_grid_spacing">4dp</dimen>
+    <dimen name="plant_grid_image_size">120dp</dimen>
+    <dimen name="plant_grid_card_radius">16dp</dimen>
+    <dimen name="plant_grid_image_radius">10dp</dimen>
+    <dimen name="plant_grid_badge_radius">8dp</dimen>
+
+    <!-- Premium Stat Cards -->
+    <dimen name="stat_card_corner_radius">20dp</dimen>
+    <dimen name="stat_card_elevation">1dp</dimen>
+    <dimen name="stat_card_padding_vertical">12dp</dimen>
+    <dimen name="stat_card_padding_horizontal">8dp</dimen>
+    <dimen name="stat_card_icon_size">20dp</dimen>
+    <dimen name="stat_card_number_size">28sp</dimen>
+    <dimen name="stat_card_label_size">10sp</dimen>
+    <dimen name="stat_card_spacing">6dp</dimen>
+
+    <!-- Premium Care Task Cards -->
+    <dimen name="care_card_corner_radius">20dp</dimen>
+    <dimen name="care_card_elevation">2dp</dimen>
+    <dimen name="care_card_icon_size">44dp</dimen>
+    <dimen name="care_card_padding">14dp</dimen>
+
+    <!-- Premium Status Badge (Compact) -->
+    <dimen name="status_badge_corner_radius">10dp</dimen>
+    <dimen name="status_badge_padding_h">6dp</dimen>
+    <dimen name="status_badge_padding_v">2dp</dimen>
+
+    <!-- Premium Card System -->
+    <dimen name="premium_card_corner_radius">18dp</dimen>
+    <dimen name="premium_card_elevation">3dp</dimen>
+    <dimen name="premium_card_stroke_width">1dp</dimen>
+
+    <!-- Care Task Thumbnail -->
+    <dimen name="care_thumbnail_size">48dp</dimen>
+    <dimen name="care_thumbnail_radius">12dp</dimen>
 </resources>

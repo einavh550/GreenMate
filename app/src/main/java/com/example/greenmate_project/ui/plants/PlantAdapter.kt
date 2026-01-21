@@ -18,22 +18,44 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Adapter for displaying plants in the My Plants RecyclerView.
+ * Supports both list and grid layouts.
  */
 class PlantAdapter(
     private val onPlantClick: (Plant) -> Unit
 ) : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffCallback()) {
 
+    private var isGridLayout: Boolean = true
+
+    fun setGridLayout(isGrid: Boolean) {
+        if (isGridLayout != isGrid) {
+            isGridLayout = isGrid
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (isGridLayout) VIEW_TYPE_GRID else VIEW_TYPE_LIST
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_plant, parent, false)
-        return PlantViewHolder(view)
+        val layoutRes = if (viewType == VIEW_TYPE_GRID) {
+            R.layout.item_plant_grid
+        } else {
+            R.layout.item_plant
+        }
+        val view = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
+        return PlantViewHolder(view, viewType == VIEW_TYPE_GRID)
     }
 
     override fun onBindViewHolder(holder: PlantViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class PlantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PlantViewHolder(
+        itemView: View,
+        private val isGrid: Boolean
+    ) : RecyclerView.ViewHolder(itemView) {
+
         private val imagePlant: ImageView = itemView.findViewById(R.id.image_plant)
         private val textPlantName: TextView = itemView.findViewById(R.id.text_plant_name)
         private val textLocation: TextView = itemView.findViewById(R.id.text_location)
@@ -47,35 +69,79 @@ class PlantAdapter(
             textPlantName.text = plant.name
 
             // Set location
-            textLocation.text = plant.location.ifEmpty {
+            val locationText = plant.location.ifEmpty {
                 context.getString(R.string.hint_location)
             }
+            textLocation.text = locationText
 
             // Calculate and display next care info
             val (nextCareText, status) = calculateNextCare(plant)
             textNextCare.text = nextCareText
 
-            // Set status badge
+            // Set status badge with premium styling based on plant status
             when (status) {
                 PlantStatus.HEALTHY -> {
                     textStatus.text = context.getString(R.string.plant_status_ok)
-                    textStatus.backgroundTintList = ContextCompat.getColorStateList(context, R.color.score_green)
+                    textStatus.setBackgroundResource(R.drawable.bg_badge_healthy)
+                    textStatus.setTextColor(ContextCompat.getColor(context, R.color.badge_healthy))
                 }
                 PlantStatus.NEEDS_ATTENTION -> {
                     textStatus.text = context.getString(R.string.plant_status_needs_attention)
-                    textStatus.backgroundTintList = ContextCompat.getColorStateList(context, R.color.score_yellow)
+                    textStatus.setBackgroundResource(R.drawable.bg_badge_attention)
+                    textStatus.setTextColor(ContextCompat.getColor(context, R.color.badge_attention))
                 }
                 PlantStatus.OVERDUE -> {
                     textStatus.text = context.getString(R.string.plant_status_overdue)
-                    textStatus.backgroundTintList = ContextCompat.getColorStateList(context, R.color.score_red)
+                    textStatus.setBackgroundResource(R.drawable.bg_badge_overdue)
+                    textStatus.setTextColor(ContextCompat.getColor(context, R.color.score_red))
                 }
             }
 
-            // Set status text color for contrast
-            textStatus.setTextColor(ContextCompat.getColor(context, R.color.white))
+            // Set next care text color based on status
+            val careTextColor = when (status) {
+                PlantStatus.OVERDUE -> ContextCompat.getColor(context, R.color.score_red)
+                PlantStatus.NEEDS_ATTENTION -> ContextCompat.getColor(context, R.color.score_yellow)
+                else -> ContextCompat.getColor(context, R.color.score_green)
+            }
+            textNextCare.setTextColor(careTextColor)
 
-            // Set plant image or default icon
+            // Handle grid image sizing for 1:1 aspect ratio
+            if (isGrid) {
+                setupGridImage(plant)
+            } else {
+                setupListImage(plant)
+            }
+
+            // Handle item click
+            itemView.setOnClickListener {
+                onPlantClick(plant)
+            }
+        }
+
+        private fun setupGridImage(plant: Plant) {
+            val context = itemView.context
+
+            // Load plant image or show placeholder
+            // Using ConstraintLayout dimensionRatio for 1:1 square aspect ratio
             val bitmap = ImageUtils.loadImage(plant.photoUrl)
+            if (bitmap != null) {
+                imagePlant.setImageBitmap(bitmap)
+                imagePlant.scaleType = ImageView.ScaleType.CENTER_CROP
+                imagePlant.setPadding(0, 0, 0, 0)
+                imagePlant.colorFilter = null
+            } else {
+                imagePlant.setImageResource(R.drawable.ic_leaf)
+                imagePlant.scaleType = ImageView.ScaleType.CENTER
+                val padding = context.resources.getDimensionPixelSize(R.dimen.spacing_lg)
+                imagePlant.setPadding(padding, padding, padding, padding)
+                imagePlant.setColorFilter(ContextCompat.getColor(context, R.color.primary))
+            }
+        }
+
+        private fun setupListImage(plant: Plant) {
+            val context = itemView.context
+            val bitmap = ImageUtils.loadImage(plant.photoUrl)
+
             if (bitmap != null) {
                 imagePlant.setImageBitmap(bitmap)
                 imagePlant.colorFilter = null
@@ -84,11 +150,6 @@ class PlantAdapter(
                 imagePlant.setImageResource(R.drawable.ic_leaf)
                 imagePlant.setColorFilter(ContextCompat.getColor(context, R.color.primary))
                 imagePlant.scaleType = ImageView.ScaleType.CENTER_INSIDE
-            }
-
-            // Handle item click
-            itemView.setOnClickListener {
-                onPlantClick(plant)
             }
         }
 
@@ -143,5 +204,10 @@ class PlantAdapter(
         override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
             return oldItem == newItem
         }
+    }
+
+    companion object {
+        private const val VIEW_TYPE_LIST = 0
+        private const val VIEW_TYPE_GRID = 1
     }
 }

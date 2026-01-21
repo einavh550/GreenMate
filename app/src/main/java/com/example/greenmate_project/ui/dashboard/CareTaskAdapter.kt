@@ -1,5 +1,6 @@
 package com.example.greenmate_project.ui.dashboard
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.example.greenmate_project.R
 import com.example.greenmate_project.model.ActionType
 import com.example.greenmate_project.model.CareTask
 import com.example.greenmate_project.model.PlantStatus
+import com.example.greenmate_project.util.ImageUtils
 import com.google.android.material.button.MaterialButton
 
 /**
@@ -34,6 +36,7 @@ class CareTaskAdapter(
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val imagePlantThumbnail: ImageView = itemView.findViewById(R.id.image_plant_thumbnail)
         private val iconActionType: ImageView = itemView.findViewById(R.id.icon_action_type)
         private val textPlantName: TextView = itemView.findViewById(R.id.text_plant_name)
         private val textTaskDescription: TextView = itemView.findViewById(R.id.text_task_description)
@@ -45,23 +48,49 @@ class CareTaskAdapter(
             // Set plant name
             textPlantName.text = task.plant.name
 
-            // Set action type icon and description
+            // Load plant thumbnail image
+            val bitmap = ImageUtils.loadImage(task.plant.photoUrl)
+            if (bitmap != null) {
+                imagePlantThumbnail.setImageBitmap(bitmap)
+                imagePlantThumbnail.scaleType = ImageView.ScaleType.CENTER_CROP
+                imagePlantThumbnail.setPadding(0, 0, 0, 0)
+                imagePlantThumbnail.colorFilter = null
+            } else {
+                // Show placeholder icon
+                imagePlantThumbnail.setImageResource(R.drawable.ic_leaf)
+                imagePlantThumbnail.scaleType = ImageView.ScaleType.CENTER
+                val padding = context.resources.getDimensionPixelSize(R.dimen.spacing_sm)
+                imagePlantThumbnail.setPadding(padding, padding, padding, padding)
+                imagePlantThumbnail.setColorFilter(ContextCompat.getColor(context, R.color.primary))
+            }
+
+            // Set action type icon, description, and button style
             when (task.actionType) {
                 ActionType.WATER -> {
                     iconActionType.setImageResource(R.drawable.ic_water)
                     iconActionType.setColorFilter(
-                        ContextCompat.getColor(context, R.color.primary_light)
+                        ContextCompat.getColor(context, R.color.button_water_background)
                     )
                     textTaskDescription.text = task.dueDescription
                     btnAction.text = context.getString(R.string.action_water)
+                    // Green Water button
+                    btnAction.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(context, R.color.button_water_background)
+                    )
+                    btnAction.setTextColor(ContextCompat.getColor(context, R.color.button_water_text))
                 }
                 ActionType.FERTILIZE -> {
                     iconActionType.setImageResource(R.drawable.ic_fertilizer)
                     iconActionType.setColorFilter(
-                        ContextCompat.getColor(context, R.color.earth_light)
+                        ContextCompat.getColor(context, R.color.button_fertilize_background)
                     )
                     textTaskDescription.text = task.dueDescription
                     btnAction.text = context.getString(R.string.action_fertilize)
+                    // Brown Fertilize button
+                    btnAction.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(context, R.color.button_fertilize_background)
+                    )
+                    btnAction.setTextColor(ContextCompat.getColor(context, R.color.button_fertilize_text))
                 }
             }
 

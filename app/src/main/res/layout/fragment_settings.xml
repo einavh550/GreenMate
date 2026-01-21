@@ -28,7 +28,8 @@
             android:layout_marginTop="@dimen/spacing_lg"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
-            app:strokeColor="?attr/colorOutline">
+            app:strokeColor="?attr/colorOutline"
+            app:cardCornerRadius="@dimen/card_corner_radius">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,7 +80,8 @@
             android:layout_marginTop="@dimen/spacing_md"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
-            app:strokeColor="?attr/colorOutline">
+            app:strokeColor="?attr/colorOutline"
+            app:cardCornerRadius="@dimen/card_corner_radius">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,6 +133,204 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Default Plant Settings Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutline"
+            app:cardCornerRadius="@dimen/card_corner_radius">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_defaults"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Title" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="@string/settings_defaults_desc"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <!-- Default Water Interval -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_md"
+                        android:layout_height="@dimen/icon_size_md"
+                        android:src="@drawable/ic_water"
+                        android:importantForAccessibility="no"
+                        app:tint="@color/primary_light" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_default_water"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Body" />
+
+                        <TextView
+                            android:id="@+id/text_default_water_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                            tools:text="Every 3 days" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/slider_default_water"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:valueFrom="1"
+                        android:valueTo="14"
+                        android:stepSize="1"
+                        android:value="3" />
+
+                </LinearLayout>
+
+                <!-- Default Fertilize Interval -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_md"
+                        android:layout_height="@dimen/icon_size_md"
+                        android:src="@drawable/ic_fertilizer"
+                        android:importantForAccessibility="no"
+                        app:tint="@color/earth_light" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_default_fertilize"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Body" />
+
+                        <TextView
+                            android:id="@+id/text_default_fertilize_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                            tools:text="Every 14 days" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/slider_default_fertilize"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:valueFrom="7"
+                        android:valueTo="60"
+                        android:stepSize="1"
+                        android:value="14" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Maintenance Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutline"
+            app:cardCornerRadius="@dimen/card_corner_radius">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_maintenance"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Title" />
+
+                <!-- Reset Local Preferences -->
+                <LinearLayout
+                    android:id="@+id/layout_reset_preferences"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/spacing_sm"
+                    android:background="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_reset_preferences"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Body" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_reset_preferences_desc"
+                            android:textAppearance="@style/TextAppearance.GreenMate.Caption"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_md"
+                        android:layout_height="@dimen/icon_size_md"
+                        android:src="@drawable/ic_arrow_back"
+                        android:rotation="180"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- About Section -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -138,7 +338,8 @@
             android:layout_marginTop="@dimen/spacing_md"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
-            app:strokeColor="?attr/colorOutline">
+            app:strokeColor="?attr/colorOutline"
+            app:cardCornerRadius="@dimen/card_corner_radius">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,9 +357,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_sm"
-                    android:text="@string/settings_about_desc"
-                    android:textAppearance="@style/TextAppearance.GreenMate.Body"
+                    android:text="@string/about_app_name"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Subtitle"
+                    android:textColor="?attr/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_subtitle"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Caption"
                     android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:text="@string/about_description"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Body"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:text="@string/about_features_title"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Body"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="@string/about_features_list"
+                    android:textAppearance="@style/TextAppearance.GreenMate.Body"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:lineSpacingExtra="4dp" />
 
             </LinearLayout>
 

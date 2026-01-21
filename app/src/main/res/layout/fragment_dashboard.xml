@@ -12,27 +12,29 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_lg">
+        android:paddingHorizontal="@dimen/spacing_md"
+        android:paddingTop="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/spacing_lg">
 
         <!-- Greeting Header -->
         <TextView
             android:id="@+id/text_greeting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_xs"
             android:text="@string/dashboard_greeting"
             android:textAppearance="@style/TextAppearance.GreenMate.Headline"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Statistics Section -->
+        <!-- Premium Statistics Row -->
         <LinearLayout
             android:id="@+id/layout_stats"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_lg"
+            android:layout_marginTop="@dimen/spacing_md"
             android:orientation="horizontal"
-            android:weightSum="3"
             app:layout_constraintTop_toBottomOf="@id/text_greeting"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -42,21 +44,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="@dimen/spacing_xs"
-                app:cardBackgroundColor="?attr/colorSurfaceVariant"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="0dp">
+                android:layout_marginEnd="@dimen/stat_card_spacing"
+                style="@style/Widget.GreenMate.StatCard">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="@dimen/spacing_md">
+                    android:paddingVertical="@dimen/stat_card_padding_vertical"
+                    android:paddingHorizontal="@dimen/stat_card_padding_horizontal">
 
                     <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="@dimen/stat_card_icon_size"
+                        android:layout_height="@dimen/stat_card_icon_size"
                         android:src="@drawable/ic_plant"
                         android:contentDescription="@null"
                         app:tint="@color/primary" />
@@ -65,8 +66,8 @@
                         android:id="@+id/text_stat_plants"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
-                        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
+                        android:layout_marginTop="4dp"
+                        android:textAppearance="@style/TextAppearance.GreenMate.StatNumber"
                         android:textColor="@color/primary"
                         tools:text="12" />
 
@@ -74,9 +75,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/stat_total_plants"
-                        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:gravity="center" />
+                        android:textAppearance="@style/TextAppearance.GreenMate.StatLabel"
+                        android:gravity="center"
+                        android:maxLines="1" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -86,42 +87,41 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="@dimen/spacing_xs"
-                android:layout_marginEnd="@dimen/spacing_xs"
-                app:cardBackgroundColor="?attr/colorSurfaceVariant"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="0dp">
+                android:layout_marginStart="@dimen/stat_card_spacing"
+                android:layout_marginEnd="@dimen/stat_card_spacing"
+                style="@style/Widget.GreenMate.StatCard">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="@dimen/spacing_md">
+                    android:paddingVertical="@dimen/stat_card_padding_vertical"
+                    android:paddingHorizontal="@dimen/stat_card_padding_horizontal">
 
                     <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="@dimen/stat_card_icon_size"
+                        android:layout_height="@dimen/stat_card_icon_size"
                         android:src="@drawable/ic_streak"
                         android:contentDescription="@null"
-                        app:tint="@color/secondary" />
+                        app:tint="@color/score_yellow" />
 
                     <TextView
                         android:id="@+id/text_stat_streak"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
-                        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
-                        android:textColor="@color/secondary"
+                        android:layout_marginTop="4dp"
+                        android:textAppearance="@style/TextAppearance.GreenMate.StatNumber"
+                        android:textColor="@color/score_yellow"
                         tools:text="7" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/stat_care_streak"
-                        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:gravity="center" />
+                        android:textAppearance="@style/TextAppearance.GreenMate.StatLabel"
+                        android:gravity="center"
+                        android:maxLines="1" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -131,53 +131,53 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="@dimen/spacing_xs"
-                app:cardBackgroundColor="?attr/colorSurfaceVariant"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="0dp">
+                android:layout_marginStart="@dimen/stat_card_spacing"
+                style="@style/Widget.GreenMate.StatCard">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="@dimen/spacing_md">
+                    android:paddingVertical="@dimen/stat_card_padding_vertical"
+                    android:paddingHorizontal="@dimen/stat_card_padding_horizontal">
 
                     <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="@dimen/stat_card_icon_size"
+                        android:layout_height="@dimen/stat_card_icon_size"
                         android:src="@drawable/ic_check_circle"
                         android:contentDescription="@null"
-                        app:tint="@color/primary" />
+                        app:tint="@color/primary_light" />
 
                     <TextView
                         android:id="@+id/text_stat_completed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
-                        android:textAppearance="@style/TextAppearance.GreenMate.Headline"
-                        android:textColor="@color/primary"
+                        android:layout_marginTop="4dp"
+                        android:textAppearance="@style/TextAppearance.GreenMate.StatNumber"
+                        android:textColor="@color/primary_light"
                         tools:text="24" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/stat_tasks_completed"
-                        android:textAppearance="@style/TextAppearance.GreenMate.Caption"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:gravity="center" />
+                        android:textAppearance="@style/TextAppearance.GreenMate.StatLabel"
+                        android:gravity="center"
+                        android:maxLines="1" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
-        <!-- Today's Tasks Section -->
+        <!-- Today's Tasks Section Header -->
         <TextView
             android:id="@+id/text_today_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_lg"
+            android:paddingHorizontal="@dimen/spacing_xs"
             android:text="@string/dashboard_today"
             android:textAppearance="@style/TextAppearance.GreenMate.Title"
             app:layout_constraintTop_toBottomOf="@id/layout_stats"
@@ -191,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_sm"
             android:nestedScrollingEnabled="false"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/text_today_header"
             app:layout_constraintStart_toStartOf="parent"
@@ -204,6 +205,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_md"
+            android:paddingHorizontal="@dimen/spacing_xs"
             android:text="@string/dashboard_empty_today"
             android:textAppearance="@style/TextAppearance.GreenMate.Body"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -213,12 +215,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:visibility="visible" />
 
-        <!-- Overdue Section -->
+        <!-- Overdue Section Header -->
         <TextView
             android:id="@+id/text_overdue_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_lg"
+            android:paddingHorizontal="@dimen/spacing_xs"
             android:text="@string/dashboard_overdue"
             android:textAppearance="@style/TextAppearance.GreenMate.Title"
             android:textColor="@color/error"
@@ -233,6 +236,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_sm"
             android:nestedScrollingEnabled="false"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/text_overdue_header"
             app:layout_constraintStart_toStartOf="parent"
@@ -246,6 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_md"
+            android:paddingHorizontal="@dimen/spacing_xs"
             android:text="@string/dashboard_empty_overdue"
             android:textAppearance="@style/TextAppearance.GreenMate.Body"
             android:textColor="?attr/colorOnSurfaceVariant"
@@ -255,7 +260,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:visibility="visible" />
 
-        <!-- All Done Message (shown when no tasks at all) -->
+        <!-- All Done Message -->
         <TextView
             android:id="@+id/text_all_done"
             android:layout_width="wrap_content"

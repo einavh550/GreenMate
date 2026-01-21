@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/plant_grid_spacing"
+    android:clickable="true"
+    android:focusable="true"
+    style="@style/Widget.GreenMate.PlantCard">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Plant Image Container (Square 1:1 ratio, dominant) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            app:cardCornerRadius="@dimen/plant_grid_image_radius"
+            app:cardElevation="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="1:1">
+
+            <ImageView
+                android:id="@+id/image_plant"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/thumbnail_placeholder"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_leaf"
+                android:contentDescription="@string/cd_plant_photo" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Compact Status Badge (top-right of image) -->
+        <TextView
+            android:id="@+id/text_status"
+            style="@style/Widget.GreenMate.StatusBadge.Healthy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Healthy" />
+
+        <!-- Plant Name -->
+        <TextView
+            android:id="@+id/text_plant_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginHorizontal="@dimen/spacing_sm"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.GreenMate.PlantCardName"
+            app:layout_constraintTop_toBottomOf="@id/card_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Monstera" />
+
+        <!-- Location -->
+        <TextView
+            android:id="@+id/text_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginHorizontal="@dimen/spacing_sm"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.GreenMate.PlantCardLocation"
+            app:layout_constraintTop_toBottomOf="@id/text_plant_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Living Room" />
+
+        <!-- Next Care Info -->
+        <TextView
+            android:id="@+id/text_next_care"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginHorizontal="@dimen/spacing_sm"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.GreenMate.PlantCardDue"
+            app:layout_constraintTop_toBottomOf="@id/text_location"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Due today" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
