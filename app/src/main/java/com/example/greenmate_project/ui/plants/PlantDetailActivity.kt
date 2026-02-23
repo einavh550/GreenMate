@@ -2,12 +2,13 @@ package com.example.greenmate_project.ui.plants
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -71,6 +72,7 @@ class PlantDetailActivity : AppCompatActivity() {
 
         initViews()
         setupToolbar()
+        setupBackNavigation()
         setupRecyclerView()
         setupListeners()
         observeViewModel()
@@ -124,10 +126,16 @@ class PlantDetailActivity : AppCompatActivity() {
         AnimationUtils.applyExitTransition(this)
     }
 
-    @Deprecated("Use finishWithAnimation instead")
-    override fun onBackPressed() {
-        super.onBackPressed()
-        AnimationUtils.applyExitTransition(this)
+    /**
+     * Sets up modern back navigation using OnBackPressedCallback.
+     * This replaces the deprecated onBackPressed() method.
+     */
+    private fun setupBackNavigation() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishWithAnimation()
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -155,10 +163,15 @@ class PlantDetailActivity : AppCompatActivity() {
             val bitmap = ImageUtils.loadImage(plant.photoUrl)
             if (bitmap != null) {
                 imagePlant.setImageBitmap(bitmap)
-                imagePlant.colorFilter = null
+                imagePlant.imageTintList = null
+                imagePlant.setPadding(0, 0, 0, 0)
+                imagePlant.scaleType = ImageView.ScaleType.CENTER_CROP
             } else {
                 imagePlant.setImageResource(R.drawable.ic_leaf)
-                imagePlant.setColorFilter(ContextCompat.getColor(this, R.color.primary_light))
+                imagePlant.imageTintList = ContextCompat.getColorStateList(this, R.color.primary_light)
+                val padding = resources.getDimensionPixelSize(R.dimen.spacing_lg)
+                imagePlant.setPadding(padding, padding, padding, padding)
+                imagePlant.scaleType = ImageView.ScaleType.CENTER_INSIDE
             }
         }
 
@@ -174,6 +187,42 @@ class PlantDetailActivity : AppCompatActivity() {
 
         viewModel.plantStatus.observe(this) { status ->
             updateStatusBadge(status)
+        }
+
+        // Update Water button state based on whether watering is needed
+        viewModel.waterNeeded.observe(this) { needed ->
+            btnWater.isEnabled = needed
+            if (needed) {
+                // Active green button - care is due
+                btnWater.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.button_water_background)
+                )
+                btnWater.setTextColor(ContextCompat.getColor(this, R.color.button_water_text))
+            } else {
+                // Light green disabled button - care is not due yet
+                btnWater.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.button_disabled_green)
+                )
+                btnWater.setTextColor(ContextCompat.getColor(this, R.color.button_disabled_text))
+            }
+        }
+
+        // Update Fertilize button state based on whether fertilizing is needed
+        viewModel.fertilizeNeeded.observe(this) { needed ->
+            btnFertilize.isEnabled = needed
+            if (needed) {
+                // Active green button - care is due
+                btnFertilize.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.button_water_background)
+                )
+                btnFertilize.setTextColor(ContextCompat.getColor(this, R.color.button_water_text))
+            } else {
+                // Light green disabled button - care is not due yet
+                btnFertilize.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.button_disabled_green)
+                )
+                btnFertilize.setTextColor(ContextCompat.getColor(this, R.color.button_disabled_text))
+            }
         }
 
         viewModel.careHistory.observe(this) { history ->
@@ -207,6 +256,10 @@ class PlantDetailActivity : AppCompatActivity() {
 
         viewModel.deleteSuccess.observe(this) { success ->
             if (success) {
+                // Clean up local plant image file
+                viewModel.plant.value?.photoUrl?.let { path ->
+                    ImageUtils.deleteImage(path)
+                }
                 showSuccess(getString(R.string.msg_plant_deleted))
                 CareTasksWidget.updateAllWidgets(this)
                 setResult(RESULT_OK)

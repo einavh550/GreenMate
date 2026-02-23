@@ -37,7 +37,6 @@ class GreenMateApp : Application() {
 
         // Initialize Firebase
         // This is automatically done by the google-services plugin,
-        // but we call it explicitly for clarity
         FirebaseApp.initializeApp(this)
     }
 }

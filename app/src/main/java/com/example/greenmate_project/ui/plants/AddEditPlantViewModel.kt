@@ -1,6 +1,5 @@
 package com.example.greenmate_project.ui.plants
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,6 +50,9 @@ class AddEditPlantViewModel : ViewModel() {
     private val _nameError = MutableLiveData<String?>()
     val nameError: LiveData<String?> = _nameError
 
+    private val _locationError = MutableLiveData<String?>()
+    val locationError: LiveData<String?> = _locationError
+
     /**
      * Loads an existing plant for editing.
      */
@@ -94,6 +96,10 @@ class AddEditPlantViewModel : ViewModel() {
      */
     fun setLocation(location: String) {
         _location.value = location
+        // Clear error when user selects a location
+        if (location.isNotBlank()) {
+            _locationError.value = null
+        }
     }
 
     /**
@@ -120,7 +126,7 @@ class AddEditPlantViewModel : ViewModel() {
     /**
      * Validates and saves the plant.
      */
-    fun savePlant(context: Context) {
+    fun savePlant() {
         // Validate name
         val name = _plantName.value?.trim() ?: ""
         if (name.isBlank()) {
@@ -128,8 +134,16 @@ class AddEditPlantViewModel : ViewModel() {
             return
         }
 
+        // Validate location
+        val location = _location.value?.trim() ?: ""
+        if (location.isBlank()) {
+            _locationError.value = "Please select a location"
+            return
+        }
+
         _isLoading.value = true
         _nameError.value = null
+        _locationError.value = null
 
         val plant = if (isEditMode && currentPlant != null) {
             // Update existing plant
@@ -179,11 +193,6 @@ class AddEditPlantViewModel : ViewModel() {
             )
         }
     }
-
-    /**
-     * Returns true if editing an existing plant.
-     */
-    fun isEditMode(): Boolean = isEditMode
 
     /**
      * Clears the error message.

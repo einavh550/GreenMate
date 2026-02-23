@@ -21,15 +21,15 @@ interface ActionRepository {
     )
 
     /**
-     * Gets recent care actions for a plant (limited count).
+     * Gets care actions for a plant performed after a given timestamp.
      * @param plantId The plant document ID
-     * @param limit Maximum number of actions to retrieve
+     * @param sinceTimestamp Only return actions performed after this time
      * @param onSuccess Called with list of actions on success
      * @param onError Called with exception on failure
      */
     fun getRecentActions(
         plantId: String,
-        limit: Int,
+        sinceTimestamp: com.google.firebase.Timestamp,
         onSuccess: (List<CareAction>) -> Unit,
         onError: (Exception) -> Unit
     )
@@ -58,6 +58,18 @@ interface ActionRepository {
     fun deleteAction(
         plantId: String,
         actionId: String,
+        onSuccess: () -> Unit,
+        onError: (Exception) -> Unit
+    )
+
+    /**
+     * Deletes all care actions for a plant (used when deleting a plant).
+     * @param plantId The plant document ID
+     * @param onSuccess Called on success
+     * @param onError Called with exception on failure
+     */
+    fun deleteAllActionsForPlant(
+        plantId: String,
         onSuccess: () -> Unit,
         onError: (Exception) -> Unit
     )

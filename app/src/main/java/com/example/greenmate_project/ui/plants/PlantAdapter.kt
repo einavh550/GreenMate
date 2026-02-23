@@ -26,6 +26,11 @@ class PlantAdapter(
 
     private var isGridLayout: Boolean = true
 
+    /**
+     * Switches between grid and list layout modes.
+     * Requires full rebind since ViewHolder layout changes.
+     */
+    @Suppress("unused", "NotifyDataSetChanged")
     fun setGridLayout(isGrid: Boolean) {
         if (isGridLayout != isGrid) {
             isGridLayout = isGrid
@@ -170,7 +175,7 @@ class PlantAdapter(
             } ?: 0 // If never fertilized, needs fertilizer now
 
             // Determine the most urgent care need
-            val (nextCareText, daysRemaining) = if (waterDaysRemaining <= fertilizeDaysRemaining) {
+            val (nextCareText, _) = if (waterDaysRemaining <= fertilizeDaysRemaining) {
                 when {
                     waterDaysRemaining < 0 -> context.getString(R.string.status_days_overdue, -waterDaysRemaining) + " (water)" to waterDaysRemaining
                     waterDaysRemaining == 0 -> context.getString(R.string.status_due_today) + " (water)" to waterDaysRemaining

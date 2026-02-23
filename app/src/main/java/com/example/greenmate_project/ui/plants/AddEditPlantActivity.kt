@@ -10,11 +10,13 @@ import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.content.ContextCompat
 import com.example.greenmate_project.R
 import com.example.greenmate_project.util.AnimationUtils
 import com.example.greenmate_project.util.Constants
@@ -82,6 +84,7 @@ class AddEditPlantActivity : AppCompatActivity() {
 
         initViews()
         setupToolbar()
+        setupBackNavigation()
         setupListeners()
         observeViewModel()
 
@@ -137,10 +140,16 @@ class AddEditPlantActivity : AppCompatActivity() {
         AnimationUtils.applyExitTransition(this)
     }
 
-    @Deprecated("Use finishWithAnimation instead")
-    override fun onBackPressed() {
-        super.onBackPressed()
-        AnimationUtils.applyExitTransition(this)
+    /**
+     * Sets up modern back navigation using OnBackPressedCallback.
+     * This replaces the deprecated onBackPressed() method.
+     */
+    private fun setupBackNavigation() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishWithAnimation()
+            }
+        })
     }
 
     private fun setupListeners() {
@@ -174,7 +183,7 @@ class AddEditPlantActivity : AppCompatActivity() {
 
         // Save button
         findViewById<View>(R.id.btn_save).setOnClickListener {
-            viewModel.savePlant(this)
+            viewModel.savePlant()
         }
     }
 
@@ -243,7 +252,7 @@ class AddEditPlantActivity : AppCompatActivity() {
 
         viewModel.photoPath.observe(this) { path ->
             if (path.isNullOrEmpty()) {
-                // Show default icon
+                // Show default icon with tint
                 imagePlant.setImageResource(R.drawable.ic_leaf)
                 imagePlant.setPadding(
                     resources.getDimensionPixelSize(R.dimen.spacing_xl),
@@ -251,20 +260,26 @@ class AddEditPlantActivity : AppCompatActivity() {
                     resources.getDimensionPixelSize(R.dimen.spacing_xl),
                     resources.getDimensionPixelSize(R.dimen.spacing_xl)
                 )
-                imagePlant.colorFilter = null
+                imagePlant.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                imagePlant.imageTintList = ContextCompat.getColorStateList(this, R.color.text_secondary)
             } else {
-                // Load and display the image
+                // Load and display the selected image
                 val bitmap = ImageUtils.loadImage(path)
                 if (bitmap != null) {
                     imagePlant.setImageBitmap(bitmap)
                     imagePlant.setPadding(0, 0, 0, 0)
-                    imagePlant.colorFilter = null
+                    imagePlant.scaleType = ImageView.ScaleType.CENTER_CROP
+                    imagePlant.imageTintList = null
                 }
             }
         }
 
         viewModel.nameError.observe(this) { error ->
             inputLayoutName.error = error
+        }
+
+        viewModel.locationError.observe(this) { error ->
+            inputLayoutLocation.error = error
         }
 
         viewModel.isLoading.observe(this) { isLoading ->

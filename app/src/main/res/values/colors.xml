@@ -90,6 +90,9 @@
     <!-- Fertilize button: Premium soil/brown -->
     <color name="button_fertilize_background">#5D4037</color>
     <color name="button_fertilize_text">#FFFFFF</color>
+    <!-- Disabled button: Light green when care is not needed yet -->
+    <color name="button_disabled_green">#C8E6C9</color>
+    <color name="button_disabled_text">#A5D6A7</color>
 
     <!-- ==================== THUMBNAIL PLACEHOLDER ==================== -->
     <color name="thumbnail_placeholder">#E8F5E9</color>

@@ -9,7 +9,7 @@ import com.google.firebase.firestore.ServerTimestamp
  *
  * Firestore path: users/{uid}/plants/{plantId}/actions/{actionId}
  */
-data class          CareAction(
+data class CareAction(
     /** Firestore document ID */
     @DocumentId
     val id: String = "",
@@ -23,7 +23,4 @@ data class          CareAction(
     /** When the action was performed */
     @ServerTimestamp
     val performedAt: Timestamp? = null
-) {
-    /** No-argument constructor required by Firestore */
-    constructor() : this(id = "")
-}
+)

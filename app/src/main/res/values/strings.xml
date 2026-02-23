@@ -44,6 +44,7 @@
     <string name="label_next_water">Next Watering</string>
     <string name="label_next_fertilize">Next Fertilizing</string>
     <string name="label_care_history">Care History</string>
+    <string name="label_care_history_note">Showing last 60 days</string>
     <string name="btn_water_now">Water Now</string>
     <string name="btn_fertilize_now">Fertilize Now</string>
     <string name="btn_edit_plant">Edit</string>

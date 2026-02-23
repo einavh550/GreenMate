@@ -228,6 +228,13 @@
                 android:text="@string/label_care_history"
                 android:textAppearance="@style/TextAppearance.GreenMate.Title" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:text="@string/label_care_history_note"
+                android:textAppearance="@style/TextAppearance.GreenMate.Caption" />
+
             <!-- Care History RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_history"

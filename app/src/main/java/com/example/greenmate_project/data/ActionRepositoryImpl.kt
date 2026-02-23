@@ -36,7 +36,7 @@ class ActionRepositoryImpl : ActionRepository {
 
     override fun getRecentActions(
         plantId: String,
-        limit: Int,
+        sinceTimestamp: com.google.firebase.Timestamp,
         onSuccess: (List<CareAction>) -> Unit,
         onError: (Exception) -> Unit
     ) {
@@ -47,8 +47,8 @@ class ActionRepositoryImpl : ActionRepository {
         }
 
         FirestoreService.actionsCollection(uid, plantId)
+            .whereGreaterThan("performedAt", sinceTimestamp)
             .orderBy("performedAt", Query.Direction.DESCENDING)
-            .limit(limit.toLong())
             .get()
             .addOnSuccessListener { snapshot ->
                 val actions = snapshot.toObjects(CareAction::class.java)
@@ -97,6 +97,39 @@ class ActionRepositoryImpl : ActionRepository {
             .delete()
             .addOnSuccessListener {
                 onSuccess()
+            }
+            .addOnFailureListener { e ->
+                onError(e)
+            }
+    }
+
+    override fun deleteAllActionsForPlant(
+        plantId: String,
+        onSuccess: () -> Unit,
+        onError: (Exception) -> Unit
+    ) {
+        val uid = FirebaseAuthService.currentUserId
+        if (uid == null) {
+            onError(IllegalStateException("User not signed in"))
+            return
+        }
+
+        // Get all action documents, then delete them in a batch
+        FirestoreService.actionsCollection(uid, plantId)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                if (snapshot.isEmpty) {
+                    onSuccess()
+                    return@addOnSuccessListener
+                }
+
+                val batch = com.google.firebase.firestore.FirebaseFirestore.getInstance().batch()
+                for (doc in snapshot.documents) {
+                    batch.delete(doc.reference)
+                }
+                batch.commit()
+                    .addOnSuccessListener { onSuccess() }
+                    .addOnFailureListener { e -> onError(e) }
             }
             .addOnFailureListener { e ->
                 onError(e)

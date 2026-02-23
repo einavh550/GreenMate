@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
  * ViewModel for the Plant Detail screen.
  * Manages plant data, care actions, and history.
  */
-class  PlantDetailViewModel : ViewModel() {
+class PlantDetailViewModel : ViewModel() {
 
     private val plantRepository: PlantRepository = PlantRepositoryImpl()
     private val actionRepository: ActionRepository = ActionRepositoryImpl()
@@ -36,6 +36,13 @@ class  PlantDetailViewModel : ViewModel() {
 
     private val _plantStatus = MutableLiveData<PlantStatus>()
     val plantStatus: LiveData<PlantStatus> = _plantStatus
+
+    // Whether watering/fertilizing is currently needed (due today or overdue)
+    private val _waterNeeded = MutableLiveData<Boolean>()
+    val waterNeeded: LiveData<Boolean> = _waterNeeded
+
+    private val _fertilizeNeeded = MutableLiveData<Boolean>()
+    val fertilizeNeeded: LiveData<Boolean> = _fertilizeNeeded
 
     // Care history
     private val _careHistory = MutableLiveData<List<CareAction>>()
@@ -111,7 +118,7 @@ class  PlantDetailViewModel : ViewModel() {
                         _actionSuccess.value = ActionType.WATER
                         refreshPlant()
                     },
-                    onError = { e ->
+                    onError = { _ ->
                         // Plant was watered but history failed - still refresh
                         _actionSuccess.value = ActionType.WATER
                         refreshPlant()
@@ -147,7 +154,7 @@ class  PlantDetailViewModel : ViewModel() {
                         _actionSuccess.value = ActionType.FERTILIZE
                         refreshPlant()
                     },
-                    onError = { e ->
+                    onError = { _ ->
                         // Plant was fertilized but history failed - still refresh
                         _actionSuccess.value = ActionType.FERTILIZE
                         refreshPlant()
@@ -162,20 +169,40 @@ class  PlantDetailViewModel : ViewModel() {
     }
 
     /**
-     * Deletes the plant.
+     * Deletes the plant along with its care history from Firestore.
      */
     fun deletePlant() {
         val plantId = currentPlantId ?: return
         _isLoading.value = true
 
-        plantRepository.deletePlant(
+        // First delete all care history actions, then delete the plant document
+        actionRepository.deleteAllActionsForPlant(
             plantId = plantId,
             onSuccess = {
-                _deleteSuccess.value = true
+                // Care history deleted, now delete the plant document
+                plantRepository.deletePlant(
+                    plantId = plantId,
+                    onSuccess = {
+                        _deleteSuccess.value = true
+                    },
+                    onError = { e ->
+                        _error.value = e.message
+                        _isLoading.value = false
+                    }
+                )
             },
-            onError = { e ->
-                _error.value = e.message
-                _isLoading.value = false
+            onError = { _ ->
+                // History cleanup failed - still delete the plant document
+                plantRepository.deletePlant(
+                    plantId = plantId,
+                    onSuccess = {
+                        _deleteSuccess.value = true
+                    },
+                    onError = { e ->
+                        _error.value = e.message
+                        _isLoading.value = false
+                    }
+                )
             }
         )
     }
@@ -212,6 +239,10 @@ class  PlantDetailViewModel : ViewModel() {
         _waterDaysRemaining.value = waterDays
         _fertilizeDaysRemaining.value = fertilizeDays
 
+        // Buttons are enabled only when care is due (today or overdue)
+        _waterNeeded.value = waterDays <= 0
+        _fertilizeNeeded.value = fertilizeDays <= 0
+
         // Determine overall status
         val minDays = minOf(waterDays, fertilizeDays)
         _plantStatus.value = when {
@@ -222,14 +253,18 @@ class  PlantDetailViewModel : ViewModel() {
     }
 
     private fun loadCareHistory(plantId: String) {
+        // Calculate timestamp for 60 days ago using TimeUnit for clean time calculation
+        val sixtyDaysAgoSeconds = Timestamp.now().seconds - TimeUnit.DAYS.toSeconds(60)
+        val sinceTimestamp = Timestamp(sixtyDaysAgoSeconds, 0)
+
         actionRepository.getRecentActions(
             plantId = plantId,
-            limit = 10,
+            sinceTimestamp = sinceTimestamp,
             onSuccess = { actions ->
                 _careHistory.value = actions
                 _isLoading.value = false
             },
-            onError = { e ->
+            onError = { _ ->
                 // History load failed but plant loaded - don't show error
                 _careHistory.value = emptyList()
                 _isLoading.value = false
